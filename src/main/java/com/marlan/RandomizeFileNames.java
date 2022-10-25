@@ -8,14 +8,22 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Main {
+public class RandomizeFileNames {
     public static void main(String[] args) throws IOException {
-        String dir = "C:\\Photos\\"; // TODO: Refactor to args
+        String dir = "C:\\Photos"; // TODO: Refactor to args
+        dir = ensureDirContainsSlash(dir);
 
         deleteDuplicates(dir); // Deletes files with the same file byte size.
         randomlyRenameFiles(dir); // Uses UUID, there is no handling for duplicate UUID.
 
         System.out.println("Done");
+    }
+
+    private static String ensureDirContainsSlash(String dir) {
+        if (!dir.endsWith("\\")) {
+            dir += "\\";
+        }
+        return dir;
     }
 
     private static void deleteDuplicates(String dir) throws IOException {
